@@ -1,0 +1,11 @@
+include: package:flutter_lints/flutter.yaml
+
+analyzer:
+  exclude:
+    - build/**
+    - android/**
+    # File contoh dari dosen dikecualikan karena hanya sebagai referensi
+    # dan tidak ikut dipakai di dalam aplikasi CineView.
+    - contoh page1.dart
+    - contohpage2.dart
+    - web/**
