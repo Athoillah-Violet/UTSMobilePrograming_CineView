@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 
-// File ini adalah tempat semua data aplikasi CineView.
-// Data disimpan dalam List berisi Map (kunci - nilai) supaya mudah dipahami.
-// Setiap film memiliki: id, judul, tahun, genre, rating, sinopsis, dan poster.
+// File ini berisi data statis aplikasi CineView.
+// Data disimpan dalam bentuk List of Map (kunci-nilai) agar sederhana dan mudah diakses.
 
 // Daftar seluruh film yang ditampilkan di aplikasi.
 final List<Map<String, dynamic>> daftarFilm = [
@@ -14,7 +13,7 @@ final List<Map<String, dynamic>> daftarFilm = [
     'rating': 8.4,
     'sinopsis':
         'Seorang pilot muda harus menembus badai paling berbahaya untuk '
-            'mengantarkan obat kepada penduduk desa yang terisolasi.',
+        'mengantarkan obat kepada penduduk desa yang terisolasi.',
     'poster': 'assets/images/petualangan_langit.jpg',
   },
   {
@@ -25,7 +24,7 @@ final List<Map<String, dynamic>> daftarFilm = [
     'rating': 7.9,
     'sinopsis':
         'Kisah seorang teknisi listrik yang berjuang menghidupkan kembali '
-            'kotanya setelah pemadaman total selama satu minggu.',
+        'kotanya setelah pemadaman total selama satu minggu.',
     'poster': 'assets/images/kota_tanpa_cahaya.jpg',
   },
   {
@@ -36,7 +35,7 @@ final List<Map<String, dynamic>> daftarFilm = [
     'rating': 7.5,
     'sinopsis':
         'Tiga sahabat salah masuk ke acara pernikahan orang lain dan '
-            'akhirnya terlibat dalam kekacauan yang lucu sepanjang hari.',
+        'akhirnya terlibat dalam kekacauan yang lucu sepanjang hari.',
     'poster': 'assets/images/tertawa_sampai_sore.jpg',
   },
   {
@@ -47,7 +46,7 @@ final List<Map<String, dynamic>> daftarFilm = [
     'rating': 7.2,
     'sinopsis':
         'Sebuah keluarga pindah ke rumah warisan dan mulai mendengar '
-            'suara langkah kaki setiap tengah malam.',
+        'suara langkah kaki setiap tengah malam.',
     'poster': 'assets/images/rumah_tua.jpg',
   },
   {
@@ -58,7 +57,7 @@ final List<Map<String, dynamic>> daftarFilm = [
     'rating': 8.7,
     'sinopsis':
         'Seorang anak menemukan pintu rahasia menuju negeri di atas awan '
-            'dan harus menolong penghuninya sebelum negeri itu hilang.',
+        'dan harus menolong penghuninya sebelum negeri itu hilang.',
     'poster': 'assets/images/negeri_awan.jpg',
   },
   {
@@ -69,7 +68,7 @@ final List<Map<String, dynamic>> daftarFilm = [
     'rating': 7.8,
     'sinopsis':
         'Mantan pembalap jalanan kembali ke lintasan untuk satu balapan '
-            'penentuan demi menyelamatkan bengkel ayahnya.',
+        'penentuan demi menyelamatkan bengkel ayahnya.',
     'poster': 'assets/images/balapan_terakhir.jpg',
   },
   {
@@ -80,7 +79,7 @@ final List<Map<String, dynamic>> daftarFilm = [
     'rating': 8.1,
     'sinopsis':
         'Dua orang asing bertemu setiap pagi di stasiun yang sama dan '
-            'perlahan membangun cerita yang tidak pernah mereka rencanakan.',
+        'perlahan membangun cerita yang tidak pernah mereka rencanakan.',
     'poster': 'assets/images/cinta_di_stasiun.jpg',
   },
   {
@@ -91,7 +90,7 @@ final List<Map<String, dynamic>> daftarFilm = [
     'rating': 7.0,
     'sinopsis':
         'Lima mahasiswa berbagi satu rumah kos sempit dan menghadapi '
-            'masalah uang, tugas, serta tetangga yang terlalu peduli.',
+        'masalah uang, tugas, serta tetangga yang terlalu peduli.',
     'poster': 'assets/images/komedi_anak_kos.jpg',
   },
   {
@@ -102,7 +101,7 @@ final List<Map<String, dynamic>> daftarFilm = [
     'rating': 6.9,
     'sinopsis':
         'Seorang penulis pindah ke rumah sewa murah dan menyadari ada '
-            'seseorang yang menulis catatan jawaban di loteng.',
+        'seseorang yang menulis catatan jawaban di loteng.',
     'poster': 'assets/images/bisikan_di_loteng.jpg',
   },
   {
@@ -113,13 +112,12 @@ final List<Map<String, dynamic>> daftarFilm = [
     'rating': 8.2,
     'sinopsis':
         'Robot pembersih kecil tersesat jauh dari rumah dan belajar arti '
-            'keberanian dari hewan-hewan yang ia temui.',
+        'keberanian dari hewan-hewan yang ia temui.',
     'poster': 'assets/images/robot_kecil.jpg',
   },
 ];
 
-// Daftar genre yang tersedia di aplikasi.
-// Ikon dipakai pada halaman Genre agar tampilan lebih menarik.
+// Daftar kategori genre dan ikon pendukungnya untuk tampilan tab Genre.
 final List<Map<String, dynamic>> daftarGenre = [
   {'nama': 'Action', 'ikon': Icons.local_fire_department},
   {'nama': 'Comedy', 'ikon': Icons.emoji_emotions},
@@ -127,7 +125,3 @@ final List<Map<String, dynamic>> daftarGenre = [
   {'nama': 'Horror', 'ikon': Icons.nightlight_round},
   {'nama': 'Animation', 'ikon': Icons.auto_awesome},
 ];
-
-// Menyimpan film yang ditambahkan pengguna ke Watchlist.
-// Cukup disimpan di dalam memori, jadi isinya hilang ketika aplikasi ditutup.
-List<Map<String, dynamic>> daftarWatchlist = [];

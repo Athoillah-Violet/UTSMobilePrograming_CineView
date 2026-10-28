@@ -1,29 +1,31 @@
 import 'package:flutter/material.dart';
+
 import 'data.dart';
-import 'detail_page.dart';
+import 'detail/detail_page.dart';
 import 'genre_page.dart';
 
-// Halaman beranda CineView.
-// Menampilkan banner film unggulan, film populer, rekomendasi, dan pilihan genre.
+// Halaman Beranda (Home):
+// Berisi Banner Unggulan, Pilihan Genre, Film Populer, dan Rekomendasi
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
 
-  // build() menyusun tampilan halaman ini dari atas ke bawah.
   @override
   Widget build(BuildContext context) {
-    // Film pertama dari data dipakai sebagai banner unggulan.
+    // Mengambil item film pertama di data.dart sebagai banner unggulan
     final Map<String, dynamic> filmUnggulan = daftarFilm[0];
 
     return Scaffold(
       appBar: AppBar(title: const Text('CineView')),
-      // SingleChildScrollView membuat isi halaman bisa digulir ke bawah.
+      // SingleChildScrollView agar seluruh konten beranda dapat di-scroll vertikal
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // ---------- BANNER FILM UNGGULAN ----------
+            // ==========================================
+            // 1. BANNER FILM UNGGULAN
+            // ==========================================
             GestureDetector(
-              // Ketukan pada banner membuka halaman detail film.
+              // Pindah ke DetailPage saat banner diklik menggunakan Navigator.push
               onTap: () {
                 Navigator.push(
                   context,
@@ -43,8 +45,6 @@ class HomePage extends StatelessWidget {
                 child: Stack(
                   fit: StackFit.expand,
                   children: [
-                    // Menampilkan poster film. Jika gambar belum ada,
-                    // akan diganti ikon film oleh errorBuilder.
                     Image.asset(
                       filmUnggulan['poster'],
                       fit: BoxFit.cover,
@@ -54,7 +54,7 @@ class HomePage extends StatelessWidget {
                         );
                       },
                     ),
-                    // Lapisan gelap di bagian bawah agar tulisan mudah dibaca.
+                    // Lapisan teks hitam transparan di bagian bawah banner
                     Align(
                       alignment: Alignment.bottomLeft,
                       child: Container(
@@ -88,65 +88,18 @@ class HomePage extends StatelessWidget {
               ),
             ),
 
-            // Judul bagian film populer.
+            // ==========================================
+            // 2. PILIHAN GENRE (Posisi di atas Film Populer)
+            // ==========================================
             const Padding(
               padding: EdgeInsets.only(left: 16, bottom: 8),
-              child: Text(
-                'Film Populer',
-                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-              ),
-            ),
-
-            // ---------- DAFTAR FILM POPULER ----------
-            // Tinggi SizedBox wajib ditentukan karena daftar digulir ke samping.
-            SizedBox(
-              height: 250,
-              child: ListView.builder(
-                scrollDirection: Axis.horizontal,
-                padding: const EdgeInsets.only(left: 16),
-                itemCount: 5,
-                itemBuilder: (context, index) {
-                  // Mengambil 5 film pertama sebagai film populer.
-                  return KartuPosterFilm(film: daftarFilm[index]);
-                },
-              ),
-            ),
-
-            // Judul bagian rekomendasi.
-            const Padding(
-              padding: EdgeInsets.only(left: 16, top: 20, bottom: 8),
-              child: Text(
-                'Rekomendasi Untukmu',
-                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-              ),
-            ),
-
-            // ---------- DAFTAR FILM REKOMENDASI ----------
-            SizedBox(
-              height: 250,
-              child: ListView.builder(
-                scrollDirection: Axis.horizontal,
-                padding: const EdgeInsets.only(left: 16),
-                itemCount: 5,
-                itemBuilder: (context, index) {
-                  // Mengambil film ke-6 sampai ke-10 sebagai rekomendasi.
-                  return KartuPosterFilm(film: daftarFilm[index + 5]);
-                },
-              ),
-            ),
-
-            // Judul bagian genre.
-            const Padding(
-              padding: EdgeInsets.only(left: 16, top: 20, bottom: 8),
               child: Text(
                 'Jelajahi Genre',
                 style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
               ),
             ),
-
-            // ---------- PILIHAN GENRE ----------
             Padding(
-              padding: const EdgeInsets.only(left: 16, right: 16, bottom: 24, top: 4),
+              padding: const EdgeInsets.only(left: 16, right: 16, bottom: 16),
               child: Wrap(
                 spacing: 8,
                 runSpacing: 8,
@@ -161,7 +114,7 @@ class HomePage extends StatelessWidget {
                       label: Text(daftarGenre[i]['nama']),
                       backgroundColor: const Color(0xFF202127),
                       side: BorderSide.none,
-                      // Menekan genre membuka halaman Genre.
+                      // Pindah ke GenrePage saat salah satu chip genre diklik
                       onPressed: () {
                         Navigator.push(
                           context,
@@ -174,6 +127,53 @@ class HomePage extends StatelessWidget {
                 ],
               ),
             ),
+
+            // ==========================================
+            // 3. DAFTAR FILM POPULER (Scroll Horizontal)
+            // ==========================================
+            const Padding(
+              padding: EdgeInsets.only(left: 16, bottom: 8),
+              child: Text(
+                'Film Populer',
+                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+              ),
+            ),
+            SizedBox(
+              height: 250,
+              child: ListView.builder(
+                scrollDirection: Axis.horizontal,
+                padding: const EdgeInsets.only(left: 16),
+                itemCount: 5,
+                itemBuilder: (context, index) {
+                  // Mengambil 5 film pertama sebagai representasi film populer
+                  return KartuPosterFilm(film: daftarFilm[index]);
+                },
+              ),
+            ),
+
+            // ==========================================
+            // 4. DAFTAR REKOMENDASI (Scroll Horizontal)
+            // ==========================================
+            const Padding(
+              padding: EdgeInsets.only(left: 16, top: 20, bottom: 8),
+              child: Text(
+                'Rekomendasi Untukmu',
+                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+              ),
+            ),
+            SizedBox(
+              height: 250,
+              child: ListView.builder(
+                scrollDirection: Axis.horizontal,
+                padding: const EdgeInsets.only(left: 16),
+                itemCount: 5,
+                itemBuilder: (context, index) {
+                  // Mengambil 5 film berikutnya (index 5 sampai 9)
+                  return KartuPosterFilm(film: daftarFilm[index + 5]);
+                },
+              ),
+            ),
+            const SizedBox(height: 24),
           ],
         ),
       ),
@@ -181,10 +181,9 @@ class HomePage extends StatelessWidget {
   }
 }
 
-// Widget kecil untuk menampilkan satu poster film dalam bentuk kartu.
-// Ditulis di file ini saja karena hanya dipakai di Home Page.
+// Widget kartu kecil untuk menampilkan poster, judul, dan rating film.
+// Dibuat reusable (dapat digunakan berulang-ulang di ListView)
 class KartuPosterFilm extends StatelessWidget {
-  // Data film dikirim lewat constructor agar widget ini bisa dipakai berulang.
   final Map<String, dynamic> film;
 
   const KartuPosterFilm({super.key, required this.film});
@@ -192,7 +191,7 @@ class KartuPosterFilm extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      // Ketukan pada kartu membuka halaman detail.
+      // Pindah ke DetailPage saat kartu film ditekan
       onTap: () {
         Navigator.push(
           context,
@@ -205,7 +204,6 @@ class KartuPosterFilm extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // Expanded membuat poster mengisi sisa tinggi kartu.
             Expanded(
               child: Container(
                 width: double.infinity,
@@ -217,7 +215,6 @@ class KartuPosterFilm extends StatelessWidget {
                 child: Image.asset(
                   film['poster'],
                   fit: BoxFit.cover,
-                  // Pengganti gambar jika file poster belum tersedia.
                   errorBuilder: (context, error, stackTrace) {
                     return const Center(
                       child: Icon(Icons.movie, size: 34, color: Colors.white38),

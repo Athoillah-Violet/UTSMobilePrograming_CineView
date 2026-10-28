@@ -1,17 +1,16 @@
 import 'package:flutter/material.dart';
-import 'explore_page.dart';
-import 'home_page.dart';
-import 'profile_page.dart';
-import 'watchlist_page.dart';
 
-// Titik masuk aplikasi CineView.
+import 'genre_page.dart';
+import 'home_page.dart';
+import 'katalog_page.dart';
+import 'profile_page.dart';
+
+// Fungsi utama: Titik awal jalannya aplikasi Flutter
 void main() {
   runApp(const AplikasiCineView());
 }
 
-// Widget utama aplikasi.
-// Dibuat StatefulWidget karena harus menyimpan menu bawah yang sedang dipilih,
-// sehingga tampilan bisa berubah ketika pengguna menekan menu lain.
+// Widget root aplikasi: Mengatur konfigurasi tema global dan navigasi menu bawah
 class AplikasiCineView extends StatefulWidget {
   const AplikasiCineView({super.key});
 
@@ -20,17 +19,29 @@ class AplikasiCineView extends StatefulWidget {
 }
 
 class _AplikasiCineViewState extends State<AplikasiCineView> {
-  // Menyimpan urutan menu yang aktif (0 = Home, 1 = Explore, 2 = Watchlist, 3 = Profile).
+  // Index menu tab yang sedang aktif:
+  // 0 = Home, 1 = Katalog, 2 = Genre, 3 = Profile
   int menuAktif = 0;
 
-  // build() dipanggil setiap kali state berubah untuk menggambar ulang tampilan.
+  // Fungsi helper: Menentukan widget halaman yang ditampilkan sesuai nilai menuAktif
+  Widget halamanYangTampil() {
+    if (menuAktif == 0) {
+      return const HomePage();
+    } else if (menuAktif == 1) {
+      return const KatalogPage();
+    } else if (menuAktif == 2) {
+      return const GenrePage();
+    } else {
+      return const ProfilePage();
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      // Banner debug dimatikan agar tampilan lebih bersih.
       debugShowCheckedModeBanner: false,
       title: 'CineView',
-      // Tema dark mode yang dipakai seluruh halaman.
+      // Pengaturan tema gelap (Dark Theme) sederhana
       theme: ThemeData(
         brightness: Brightness.dark,
         scaffoldBackgroundColor: const Color(0xFF111318),
@@ -47,39 +58,27 @@ class _AplikasiCineViewState extends State<AplikasiCineView> {
         ),
       ),
       home: Scaffold(
-        // Bagian tengah menampilkan halaman sesuai menu yang dipilih.
+        // Menampilkan halaman sesuai tab yang dipilih
         body: halamanYangTampil(),
-        // Menu navigasi bawah dengan empat pilihan utama.
+
+        // Navigasi Tab Bawah (BottomNavigationBar)
         bottomNavigationBar: BottomNavigationBar(
           currentIndex: menuAktif,
           type: BottomNavigationBarType.fixed,
+          // Saat ikon tab ditekan, setState() mengubah menuAktif sehingga tampilan berganti
           onTap: (index) {
-            // setState() dipakai agar tampilan langsung berubah saat menu ditekan.
             setState(() {
               menuAktif = index;
             });
           },
           items: const [
             BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
-            BottomNavigationBarItem(icon: Icon(Icons.search), label: 'Explore'),
-            BottomNavigationBarItem(icon: Icon(Icons.bookmark), label: 'Watchlist'),
+            BottomNavigationBarItem(icon: Icon(Icons.movie), label: 'Katalog'),
+            BottomNavigationBarItem(icon: Icon(Icons.category), label: 'Genre'),
             BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Profile'),
           ],
         ),
       ),
     );
-  }
-
-  // Mengembalikan halaman yang harus ditampilkan berdasarkan menuAktif.
-  Widget halamanYangTampil() {
-    if (menuAktif == 0) {
-      return const HomePage();
-    } else if (menuAktif == 1) {
-      return const ExplorePage();
-    } else if (menuAktif == 2) {
-      return const WatchlistPage();
-    } else {
-      return const ProfilePage();
-    }
   }
 }
