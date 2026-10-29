@@ -14,7 +14,7 @@ class ProfilePage extends StatelessWidget {
         padding: const EdgeInsets.all(20),
         child: Column(
           children: [
-            // ---------- LOGO APLIKASI ----------
+            // ---------- FOTO PROFIL / LOGO ----------
             Container(
               width: 100,
               height: 100,
@@ -22,22 +22,31 @@ class ProfilePage extends StatelessWidget {
                 color: Color(0xFF202127),
                 shape: BoxShape.circle,
               ),
-              child: const Icon(
-                Icons.movie_filter,
-                size: 52,
-                color: Color(0xFFE5B96A),
+              clipBehavior: Clip.antiAlias,
+              child: Image.asset(
+                'assets/images/profile.jpeg',
+                fit: BoxFit.cover,
+                errorBuilder: (context, error, stackTrace) {
+                  return const Center(
+                    child: Icon(
+                      Icons.movie_filter,
+                      size: 52,
+                      color: Color(0xFFE5B96A),
+                    ),
+                  );
+                },
               ),
             ),
             const SizedBox(height: 16),
 
-            // ---------- NAMA APLIKASI ----------
+            // ---------- NAMA Profil ----------
             const Text(
-              'CineView',
+              'Athoillah',
               style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 4),
             const Text(
-              'Versi 1.0.0',
+              'Filem Treveler',
               style: TextStyle(fontSize: 13, color: Colors.white54),
             ),
             const SizedBox(height: 20),
@@ -53,15 +62,10 @@ class ProfilePage extends StatelessWidget {
               child: const Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
-                    'Tentang Aplikasi',
-                    style: TextStyle(fontWeight: FontWeight.bold),
-                  ),
+                  Text('Bio', style: TextStyle(fontWeight: FontWeight.bold)),
                   SizedBox(height: 8),
                   Text(
-                    'CineView adalah aplikasi katalog film sederhana yang '
-                    'menampilkan daftar film, pencarian judul, filter genre, '
-                    'dan daftar tontonan pribadi (watchlist).',
+                    'Menikmati Filem dari segala genre dan berbagai negara, untuk mencari pengetahuan yang lebih mendalam dari segala sudut pandang.',
                     style: TextStyle(color: Colors.white70, height: 1.5),
                   ),
                 ],
@@ -87,17 +91,17 @@ class ProfilePage extends StatelessWidget {
                   ),
                   SizedBox(height: 8),
                   Text(
-                    'Nama     : Athoillah Almadany',
+                    'Nama     : Ahmad Athoillah Almadany',
                     style: TextStyle(color: Colors.white70),
                   ),
                   SizedBox(height: 4),
                   Text(
-                    'NIM      : 2312345678',
+                    'NPM      : 24670012',
                     style: TextStyle(color: Colors.white70),
                   ),
                   SizedBox(height: 4),
                   Text(
-                    'Kelas    : Teknik Informatika',
+                    'Kelas    : 5A Teknik Informatika',
                     style: TextStyle(color: Colors.white70),
                   ),
                 ],
@@ -119,8 +123,7 @@ class ProfilePage extends StatelessWidget {
                   SizedBox(width: 12),
                   Expanded(
                     child: Text(
-                      'Aplikasi ini dibuat untuk memenuhi tugas UAS mata kuliah '
-                      'Pemrograman Mobile menggunakan Flutter.',
+                      'Kurang lebih inilah Aplikasi Mobile untuk Tugas UTS Mobile Prorgaiming yang saya buat.',
                       style: TextStyle(color: Colors.white70, height: 1.5),
                     ),
                   ),
